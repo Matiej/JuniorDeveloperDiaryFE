@@ -1,21 +1,205 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<mat-sidenav-container >
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">
+        <mat-icon class="icon">home</mat-icon>
+        <span class="label">HOME</span>
+      </a>
+      <a mat-list-item>
+        <span class="label" [matMenuTriggerFor]="candidatesP">CANDIDATE</span>
+        <mat-icon class="icon">arrow_drop_down</mat-icon>
+        <mat-menu #candidatesP="matMenu">
+          <a
+            routerLink="candidate"
+            mdbWavesEffect
+            role="button"
+            routerLinkActive="active"
+            mat-list-item
+            ><a mat-button>
+              <mat-icon class="icon">fiber_new</mat-icon>
+              <span class="label">ADD NEW</span>
+            </a>
+          </a>
+          <a
+            routerLink="candidate"
+            mdbWavesEffect
+            role="button"
+            routerLinkActive="active"
+            mat-list-item
+            ><a mat-button>
+              <mat-icon class="icon">format_list_bulleted</mat-icon>
+              <span class="label">SHOW ALL</span>
+            </a>
+          </a>
+        </mat-menu>
+      </a>
 
-<router-outlet></router-outlet>
+      <a mat-list-item>
+        <span class="label" [matMenuTriggerFor]="jobOfferP">JOB OFFERS</span>
+        <mat-icon class="icon">arrow_drop_down</mat-icon>
+        <mat-menu #jobOfferP="matMenu">
+          <a
+            routerLink="newjob"
+            role="button"
+            routerLinkActive="active"
+            mat-list-item
+            ><a mat-button>
+              <mat-icon class="icon">fiber_new</mat-icon>
+              <span class="label">ADD NEW</span>
+            </a>
+          </a>
+          <a
+            routerLink="joboffers"
+            role="button"
+            routerLinkActive="active"
+            mat-list-item
+            ><a mat-button>
+              <mat-icon class="icon">format_list_bulleted</mat-icon>
+              <span class="label">SHOW ALL</span>
+            </a>
+          </a>
+        </mat-menu>
+      </a>
+
+      <a
+        mat-button
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.linkedin.com/in/matiej/"
+      >
+        <mat-icon class="icon"
+          ><img src="/assets/linkedin-box.png" alt="jdd"
+        /></mat-icon>
+      </a>
+
+      <a
+        mat-button
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/Matiej"
+      >
+        <mat-icon class="icon"
+          ><img src="/assets/github-circle.png" alt="jdd"
+        /></mat-icon>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class= "fixed-header" color="accent">
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <span class="menu-spacer">
+        <img width="30%" src="/assets/jdd.png" alt="jdd" />
+      </span>
+      <div fxShow="true" fxHide.xs>
+        <ul fxLayout layout-align="start-center" class="navigation-items">
+          <li routerLinkActive="active">
+            <a
+              routerLink="/"
+              role="button"
+              routerLinkActive="active"
+              mat-button
+            >
+              <mat-icon class="icon">home</mat-icon>
+              <span class="label">HOME</span>
+            </a>
+          </li>
+          <li>
+            <a role="button" routerLinkActive="active" mat-button routerLinkActive="active"> 
+              <span class="label" [matMenuTriggerFor]="candidates"
+                >CANDIDATE</span
+              >
+              <mat-icon class="icon">arrow_drop_down</mat-icon>
+              <mat-menu #candidates="matMenu">
+                <a
+                  routerLink="candidate"
+                  role="button"
+                  routerLinkActive="active"
+                  mat-list-item
+                  ><a mat-button>
+                    <mat-icon class="icon">fiber_new</mat-icon>
+                    <span class="label">ADD NEW</span>
+                  </a>
+                </a>
+                <a
+                  routerLink="candidate"
+                  role="button"
+                  routerLinkActive="active"
+                  mat-list-item
+                  ><a mat-button>
+                    <mat-icon class="icon">format_list_bulleted</mat-icon>
+                    <span class="label">SHOW ALL</span>
+                  </a>
+                </a>
+              </mat-menu>
+            </a>
+          </li>
+
+          <span class="menu-spacer"></span>
+
+          <li>
+            <a routerLinkActive="active" role="button" mat-button>
+              <span class="label" [matMenuTriggerFor]="offers">
+                JOB OFFERS
+              </span>
+              <mat-icon class="icon">arrow_drop_down</mat-icon>
+            </a>
+            <mat-menu #offers="matMenu">
+              <a
+                routerLink="newjob"
+                role="button"
+                routerLinkActive="active"
+                mat-list-item
+                ><a mat-button>
+                  <mat-icon class="icon">fiber_new</mat-icon>
+                  <span class="label">ADD NEW</span>
+                </a>
+              </a>
+              <a
+                routerLink="joboffers"
+                role="button"
+                routerLinkActive="active"
+                mat-list-item
+                ><a mat-button>
+                  <mat-icon class="icon">format_list_bulleted</mat-icon>
+                  <span class="label">SHOW ALL</span>
+                </a>
+              </a>
+            </mat-menu>
+          </li>
+          <li>
+            <a
+              mat-button
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/matiej/"
+            >
+              <mat-icon class="icon"
+                ><img src="/assets/linkedin.png" alt="linkedid"
+              /></mat-icon>
+            </a>
+          </li>
+          <li>
+            <a
+              mat-button
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/Matiej"
+            >
+              <mat-icon class="icon"
+                ><img src="/assets/github-box.png" alt="github"
+              /></mat-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <main style="position: relative; top: 65px; ">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

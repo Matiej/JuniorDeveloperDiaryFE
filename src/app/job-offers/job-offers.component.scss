@@ -1,0 +1,37 @@
+.element-row:not(.expanded):hover {
+  background: #060120ad;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.joblist {
+  float: left;
+  width: 40%;
+  padding: 20px;
+}
+
+.jobdet {
+  float: right;
+  padding: 20px;
+  width: 60%;
+}
+
+.jobdet ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.jobdet ul li {
+  word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .jobdet,
+  .joblist {
+    width: 100%;
+    height: auto;
+  }
+}

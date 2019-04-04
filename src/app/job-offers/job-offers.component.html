@@ -1,0 +1,115 @@
+<div style="text-align:center;">
+  <div *ngIf="isLoading">
+    <div class="joblist">
+      <h2
+        style="color:blanchedalmond; text-shadow: 3px 9px 7px rgb(108, 110, 109);"
+      >
+        MY SENT CV's TO<br />
+        DATE:
+        {{ today | date: "yyyy-MM-dd HH:ss" }}
+      </h2>
+      <div class="filter-header">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="table-container mat-elevation-z8">
+        <mat-paginator
+          style="background-color:transparent;"
+          [pageSizeOptions]="[5, 10, 25]"
+        ></mat-paginator>
+
+        <mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Offer ID</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row">{{ row.id }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="title">
+            <mat-header-cell style="color: rgb(161, 161, 245)" *matHeaderCellDef mat-sort-header
+              >Title</mat-header-cell
+            >
+            <mat-cell  style="color: rgb(161, 161, 245)" *matCellDef="let row">{{ row.title }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="company">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Company</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row">{{ row.company }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sentDate">
+            <mat-header-cell style="color: rgb(161, 161, 245)" *matHeaderCellDef mat-sort-header
+              >CV sent date</mat-header-cell
+            >
+            <mat-cell style="color: rgb(161, 161, 245)" *matCellDef="let row">{{ row.sentDate }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="salary">
+            <mat-header-cell *matHeaderCellDef mat-sort-header
+              >Salary</mat-header-cell
+            >
+            <mat-cell *matCellDef="let row">{{ row.salary }}</mat-cell>
+          </ng-container>
+
+          <ng-container  matColumnDef="employerReplies">
+            <mat-header-cell  style="color: rgb(161, 161, 245)" *matHeaderCellDef mat-sort-header
+              >Emp replies</mat-header-cell
+            >
+            <mat-cell style="color: rgb(161, 161, 245); text-align: center" *matCellDef="let row">{{
+              row.employerReplies.length
+            }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row
+            *matHeaderRowDef="createDisplayedColumns()"
+          ></mat-header-row>
+          <mat-row
+            *matRowDef="let row; columns: createDisplayedColumns()"
+            matRipple
+            class="element-row"
+            (click)="getJobOfferById(row.id)"
+          ></mat-row>
+        </mat-table>
+      </div>
+    </div>
+
+    <div class="jobdet" >
+      <div *ngIf="!isOffer">
+        <h2
+          style="color:blanchedalmond; text-shadow: 3px 9px 7px rgb(108, 110, 109);"
+        >
+          NO DETAILS SELECTED:
+        </h2>
+      </div>
+      <div *ngIf="isOffer">
+        <h2
+          style="color:blanchedalmond; text-shadow: 3px 9px 7px rgb(108, 110, 109);"
+        >
+          DETAILS OF THE OFFER TITLE: {{ offer.title }} NO.
+          {{ offer.id }} <br> DATED: {{ offer.sentDate}}
+        </h2>
+        <br />
+        <p>Title: {{ offer.title }}</p>
+        <p>EMPLOYER REPLYS</p>
+        <div *ngIf="offer.employerReplies.length > 0">
+          <ul *ngFor="let empl of offer.employerReplies">
+            <li>{{ empl.id }}</li>
+            <li>{{ empl.date }}</li>
+            <li>{{ empl.replyType }}</li>
+            <li >{{ empl.replyContent }}</li>
+          </ul>
+        </div>
+        <p>MustHave: {{ offer.mustHave }}</p>
+      </div>
+    </div>
+  </div>
+</div>

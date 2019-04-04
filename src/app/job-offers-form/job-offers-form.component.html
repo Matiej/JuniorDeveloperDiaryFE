@@ -1,0 +1,169 @@
+<div>
+  <mat-card style="margin-top: 5%;">
+    <mat-card-header>
+      <mat-card-title
+        style="text-align: center; color:blanchedalmond; text-shadow: 3px 9px 7px rgb(108, 110, 109);"
+        >JOB OFFER REGISTRATION FORM</mat-card-title
+      >
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        class="offer-form"
+        autocomplete="off"
+        novalidate
+        [formGroup]="offerForm"
+        (ngSubmit)="createOffer(offerForm.value)"
+      >
+        <table class="offer-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="offer-full-width">
+                <input
+                  matInput
+                  placeholder="title"
+                  value=""
+                  formControlName="title"
+                  id="title"
+                />
+                <mat-hint align="end"
+                  >Not more then 100 characters long.</mat-hint
+                >
+                <mat-error >
+                    {{ matError }}
+                  </mat-error>
+              </mat-form-field>
+            </td>
+            <br>
+            <td>
+              <mat-form-field class="offer-full-width">
+                <input
+                  matInput
+                  placeholder="Company"
+                  value=""
+                  formControlName="company"
+                  id="company"
+                />
+                <mat-hint align="end"
+                  >Not more then 100 characters long.</mat-hint
+                >
+                <mat-error >
+                  {{ matError }}
+                </mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="offer-full-width">
+      
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Sent date"
+                  value=""
+                  formControlName="sentDate"
+                  id="sentDate"
+                  readonly
+                  (click)="picker.open()"
+                />
+                <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+        <p>
+          <mat-form-field class="offer-full-width">
+            <textarea matInput placeholder="Must Have"
+            rows="10"
+            cols="40"
+            value=""
+            formControlName="mustHave"
+            id="mustHave"
+            >
+
+            </textarea>
+          </mat-form-field>
+          <mat-form-field class="offer-full-width">
+            <textarea
+              matInput
+              rows="10"
+              cols="40"
+              value=""
+              placeholder="Nice to have"
+              formControlName="niceToHave"
+              id="niceToHave"
+            ></textarea>
+          </mat-form-field>
+          <mat-form-field class="offer-full-width">
+              <textarea
+                matInput
+                rows="10"
+                cols="40"
+                value=""
+                placeholder="Other content"
+                formControlName="otherContent"
+                id="otherContent"
+              ></textarea>
+            </mat-form-field>
+        </p>
+
+        <table class="offer-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="offer-full-width">
+                <input matInput placeholder="Salary"
+                value=""
+                formControlName="salary"
+                id="salary"
+                 />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="offer-full-width">
+                <input matInput placeholder="Sent method"
+                value=""
+                formControlName="sentMethod" 
+                id="sentMethod"
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="offer-full-width">
+                <input
+                  matInput
+                  #seniorityLevel
+                  maxlength="5"
+                  placeholder="Seniority level"
+                  value=""
+                  formControlName="seniorityLevel"
+                />
+                <mat-hint
+                  >{{ seniorityLevel.value.length }} / 5</mat-hint
+                >
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions fxLayoutAlign="center center" class="form-element">
+      <button
+        mat-raised-button
+        style="background-color: rgb(69, 100, 240)"
+        type="submit"
+        class="button"
+      >
+        Register
+      </button>
+      <button mat-raised-button color="warn" type="submit" class="button">
+        Cancel
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <!-- <button role="button" (click) = "saveOffer()">SAVE</button> -->
+</div>
