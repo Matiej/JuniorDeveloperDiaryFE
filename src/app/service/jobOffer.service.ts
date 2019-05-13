@@ -4,6 +4,7 @@ import { JobOffer } from './../model/job-offer';
 import { HttpClientModule, HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { formatDate } from '@angular/common';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,24 +15,28 @@ const httpOptions = {
 })
 export class JobOfferService {
   private baseUrl = "//localhost:8088/jobs";
+  private formatDate = 'yyyy-MM-dd';
 
   constructor(private httpServ: HttpClient) {}
 
-  getAllJobOffers(): Observable<Array<JobOffer>> {
+  public getAllJobOffers(): Observable<Array<JobOffer>> {
     return this.httpServ.get<Array<JobOffer>>(this.baseUrl + '/findAll');
   }
 
-  getJobOfferById(jobOfferId: number): Observable<JobOffer> {
+  public getJobOfferById(jobOfferId: number): Observable<JobOffer> {
     const parm = new HttpParams().set('offerId', jobOfferId + '')
     return this.httpServ.get<JobOffer>(this.baseUrl+'/findOne', {params: parm});
   }
 
-  postJobOffer(jobOffer: JobOfferResponse): Observable<JobOffer> {
+  public postJobOffer(jobOffer: JobOfferResponse): Observable<JobOffer> {
+    const date = new Date(jobOffer.sentDate);
+    const formattedDate = formatDate(date, this.formatDate, 'en-US', 'Europe/Warsaw');
+    console.log('try date: ' + formattedDate);
     const jobOfferResponse: JobOfferResponse = {
       id: jobOffer.id,
       title: jobOffer.title,
       company: jobOffer.company,
-      sentDate: jobOffer.sentDate,
+      sentDate: formattedDate,
       offerSaveDate: jobOffer.offerSaveDate,
       salary: jobOffer.salary,
       seniorityLevel: jobOffer.seniorityLevel,
@@ -43,5 +48,6 @@ export class JobOfferService {
       employerReplies: jobOffer.employerReplies
     };
     return this.httpServ.post<JobOffer>(this.baseUrl+'/add', jobOfferResponse, httpOptions);
+    // return new Observable;
   }
 }

@@ -6,22 +6,21 @@
         >JOB OFFER REGISTRATION FORM</mat-card-title
       >
     </mat-card-header>
-
+    <form       
+    class="offer-form"
+    autocomplete="off"
+    novalidate
+    [formGroup]="offerForm"
+    (ngSubmit)="createOffer(offerForm.value)"
+  >
     <mat-card-content>
-      <form
-        class="offer-form"
-        autocomplete="off"
-        novalidate
-        [formGroup]="offerForm"
-        (ngSubmit)="createOffer(offerForm.value)"
-      >
         <table class="offer-full-width" cellspacing="0">
           <tr>
             <td>
               <mat-form-field class="offer-full-width">
                 <input
                   matInput
-                  placeholder="title"
+                  placeholder="Title"
                   value=""
                   formControlName="title"
                   id="title"
@@ -83,9 +82,7 @@
             value=""
             formControlName="mustHave"
             id="mustHave"
-            >
-
-            </textarea>
+            ></textarea>
           </mat-form-field>
           <mat-form-field class="offer-full-width">
             <textarea
@@ -148,7 +145,7 @@
             </td>
           </tr>
         </table>
-      </form>
+      
     </mat-card-content>
 
     <mat-card-actions fxLayoutAlign="center center" class="form-element">
@@ -160,10 +157,11 @@
       >
         Register
       </button>
-      <button mat-raised-button color="warn" type="submit" class="button">
+      <button mat-raised-button color="warn" type="submit" class="button" (click)="onCancel()">
         Cancel
       </button>
     </mat-card-actions>
+  </form>
   </mat-card>
   <!-- <button role="button" (click) = "saveOffer()">SAVE</button> -->
 </div>

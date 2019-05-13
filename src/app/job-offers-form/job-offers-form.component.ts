@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { Location } from '@angular/common';
 
 export const MY_FORMATS = {
   parse: {
@@ -37,21 +38,16 @@ export const MY_FORMATS = {
 export class JobOffersFormComponent implements OnInit {
   public email: string = "";
   public password: string = "";
-  matError: string = "I'm sorry dear candidate, name size must be min 2 chars here";
+  matError: string = "I'm sorry dear candidate, name size must be min 2 chars here -> DO POPRAWY";
   @Input()
   offerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private jobOfferServ: JobOfferService) {}
+  constructor(private location: Location, private formBuilder: FormBuilder, private jobOfferServ: JobOfferService) {
+  
+  }
 
   ngOnInit(): void {
    this.createForm();
-  }
-
-  public saveOffer() {
-    console.log('saving jobOffer')
-    this.jobOfferServ.postJobOffer(this.createJobOffer()).subscribe(job=> {
-      console.log('sub ' + job.id);
-    });
   }
 
   private createForm() {
@@ -77,12 +73,24 @@ export class JobOffersFormComponent implements OnInit {
   }
 
   public createOffer = (offerFromValue) => {
-    console.log('title test-> ' + offerFromValue.title)
-    
-  };
+    console.log('TEST CREATEOFFER');
+    console.log('title test-> ' + offerFromValue.title + 'date ' + offerFromValue.sentDate);
+    this.saveOffer(offerFromValue);
+
+  }
+
+  private saveOffer(jobOfferForm: JobOffer) {
+    console.log('saving jobOffer')
+    this.jobOfferServ.postJobOffer(jobOfferForm).subscribe();
+        // this.jobOfferServ.postJobOffer(jobOfferForm);
+  }
+
+  public onCancel = () => {
+    console.log('cancel test')
+    this.location.back();
+  }
 
   private createJobOffer(): JobOffer {
-    
     const offer1 = new JobOffer();
     offer1.company = 'conpany_ TWO';
     offer1.mustHave = 'must_haveTest';
